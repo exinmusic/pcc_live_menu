@@ -20,15 +20,22 @@
           <td data-label="THC">{{ item.thc }}</td>
           <td data-label="CBD">{{ item.cbd }}</td>
           <td data-label="Gram">${{ item.price }}</td>
+          <td v-if="item.price === '15.50'" data-label="Eighth">$46.50</td>
           <td v-if="item.price === '13.50'" data-label="Eighth">$40.50</td>
           <td v-if="item.price === '12.00'" data-label="Eighth">$36.00</td>
           <td v-if="item.price === '10.50'" data-label="Eighth">$31.50</td>
           <td v-if="item.price === '9.00'" data-label="Eighth">$27.00</td>
           <td v-if="item.price === '7.50'" data-label="Eighth">$22.50</td>
-          <td v-if="item.price === '6.25'" data-label="Eighth">$18.25</td>
+          <td v-if="item.price === '6.25'" data-label="Eighth">$18.75</td>
         </tr>
       </tbody>
     </table>
+    
+    <footer>
+      <p v-if="info.data.results">Last updated: {{ date }}</p>
+      <p v-else>Connecting to database...</p>
+    </footer>
+
   </div>
 </template>
 
@@ -45,17 +52,19 @@ export default {
     getData: function() {
       axios
       .get('https://www.portlandcannabis.com/api/flower/?limit=50')
-      .then(response => (this.info = response))  
+      .then(response => (this.info = response)) 
+      this.date = new Date().toLocaleString() 
     }
   },
   data () {
     return {
-      info: null
+      info: null,
+      date: null
     }
   },
   mounted () {
     this.getData();
-    this.intervalID = setInterval(this.getData.bind(this), 10000);
+    this.intervalID = setInterval(this.getData.bind(this), 30000);
   }
 }
 </script>
@@ -66,5 +75,17 @@ export default {
 }
 .bump_down {
   padding-top: 1em !important;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  background-color: #494949;
+  color: #ff09c2;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 </style>
