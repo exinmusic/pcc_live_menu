@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
-    <table class="ui very basic celled inverted black table">
+    <table class="ui very basic celled inverted table">
       <thead>
-        <tr><th class="bump bump_down">Name</th>
+        <tr><th class="bump bump_down">Strain</th>
         <th class="bump_down">Phenotype</th>
         <th class="bump_down">Company</th>
         <th class="bump_down">THC</th>
@@ -32,7 +32,7 @@
     </table>
     
     <footer>
-      <p v-if="info.data.results">Last updated: {{ date }}</p>
+      <p v-if="info.data.results">Last updated: {{ date }} <span id="foot_counter">Count: {{ info.data.count }}</span></p>
       <p v-else>Connecting to database...</p>
     </footer>
 
@@ -75,6 +75,11 @@ export default {
 }
 .bump_down {
   padding-top: 1em !important;
+}
+#foot_counter {
+  float: right;
+  padding-right: 20px;
+  color: #ffc609 !important;
 }
 footer {
   position: absolute;
