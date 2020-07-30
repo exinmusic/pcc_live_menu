@@ -12,7 +12,7 @@
       </tr></thead>
       <tbody v-for="item in info.data.results" :key="item.name">
         <tr>
-          <td class="bump" data-label="Name"><h4>{{ item.name }}</h4></td>
+          <td class="bump" data-label="Name"><h4>{{ item.name }}  <span v-if="item.high_cbd" class="ui mini orange circular label" style="margin-left:1em;">CBD</span>  </h4></td>
           <td v-if="item.phenotype === 'sativa'" data-label="Phenotype" style="background-color: orange;">{{ item.phenotype }}</td>
           <td v-if="item.phenotype === 'hybrid'" data-label="Phenotype" style="background-color: teal;">{{ item.phenotype }}</td>
           <td v-if="item.phenotype === 'indica'" data-label="Phenotype" style="background-color: purple;">{{ item.phenotype }}</td>
